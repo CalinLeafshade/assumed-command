@@ -19,10 +19,24 @@ Goo.draw = function()
 end
 
 Goo.mouseDown = function(x,y,b)
-	Goo.base:onMouseDown(x,y,b)
+	if not Goo.base:onMouseDown(x,y,b) then -- Goo didnt catch the click
+		
+	end
 end
 
 Goo.mouseUp = function(x,y,b)
 	Goo.base:onMouseUp(x,y,b)
+end
+
+Goo.keyDown = function(key)
+	Goo.base:onKeyDown(key)
+end
+
+Goo.keyUp = function(key)
+	Goo.base:onKeyUp(key)
+end
+
+Goo.textEntry = function(text)
+	Goo.base:onTextEntry(text)
 end
 

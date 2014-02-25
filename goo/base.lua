@@ -14,7 +14,7 @@ function GUIBase:initialize()
 	self.y = 0
 	self.z = 0
 	self.font = baseFont
-	self.text = ""
+	self.text = "Text"
 	self.width = 100
 	self.height = 100
 end
@@ -28,7 +28,9 @@ function GUIBase:onMouseDown(x,y,b)
 	if c ~= self then
 		local ax,ay = c:absolutePosition()
 		c:onMouseDown(x-ax,y-ay,b)
+		return true
 	end
+	return false -- no hit
 end
 
 function GUIBase:onMouseUp(x,y,b)
@@ -37,6 +39,61 @@ function GUIBase:onMouseUp(x,y,b)
 		local ax,ay = c:absolutePosition()
 		c:onMouseUp(x-ax,y-ay,b)
 	end	
+end
+
+function GUIBase:bringToFront()
+	if self.parent then
+		self.parent:sendControlToFront(self)
+	end
+end
+
+function GUIBase:sendControlToFront(c)
+	local min = math.huge
+	for i,v in ipairs(self.controls) do
+		min = math.min(min,v.z)
+	end
+	c.z = min - 1
+end
+
+function GUIBase:blur() end
+
+function GUIBase:focus(control)
+	if self.focussed and self.focussed ~= control then
+		self.focussed:blur(control)
+	end
+	self.focussed = control
+end
+
+function GUIBase:sendMessageUpwards(name, ...)
+	if type(self[name]) == "function" then
+		self[name](self,...)
+	end
+	if self.parent then
+		self.parent:sendMessageUpwards(name,...)
+	end
+end
+
+function GUIBase:getAbsoluteBounds()
+	local x,y = self:absolutePosition()
+	return x,y,self.width,self.height
+end
+
+function GUIBase:onKeyDown(key)
+	if self.focussed then
+		self.focussed:onKeyDown(key)
+	end
+end
+
+function GUIBase:onKeyUp(key)
+	if self.focussed then
+		self.focussed:onKeyUp(key)
+	end
+end
+
+function GUIBase:onTextEntry(text)
+	if self.focussed then
+		self.focussed:onTextEntry(text)
+	end
 end
 
 function GUIBase:update(dt)
@@ -100,8 +157,8 @@ function GUIBase:drawChildren()
 	self:sortControls()
 	love.graphics.push()
 	love.graphics.translate(self.x,self.y)
-	for i,v in ipairs(self.controls) do
-		v:draw()
+	for i=#self.controls,1,-1 do
+		self.controls[i]:draw()
 	end
 	love.graphics.pop()
 end

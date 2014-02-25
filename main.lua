@@ -1,3 +1,4 @@
+
 -- main.lua
 io.stdout:setvbuf("no")
 
@@ -6,7 +7,8 @@ require('goo')
 require('goo.testgui')
 
 function love.load()
-	TestGUI()
+	TestGUI(0,0)
+	TestGUI(300,300)
 end
 
 function love.update()
@@ -23,4 +25,16 @@ end
 
 function love.mousereleased(x,y,b)
 	Goo.mouseUp(x,y,b)
+end
+
+function love.keypressed(key)
+	Goo.keyDown(key)
+end
+
+function love.keyreleased(key)
+	Goo.keyUp(key)
+end
+
+function love.textinput(text)
+	Goo.textEntry(text)
 end

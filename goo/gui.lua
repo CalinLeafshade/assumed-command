@@ -19,6 +19,10 @@ end
 
 function GUI:initializeLayout() end
 
+function GUI:focus()
+	self:bringToFront()
+end
+
 function GUI:onMouseEnter()
 	self.hovered = true
 end
@@ -28,6 +32,7 @@ function GUI:onMouseLeave()
 end
 
 function GUI:onMouseDown(x,y)
+	self:sendMessageUpwards("focus", self)
 	if y < self.titleBarHeight then
 		self.dragging = {x,y}
 	end
