@@ -120,6 +120,14 @@ function GUIBase:add(c)
 	table.insert(self.controls,c)
 end
 
+function GUIBase:remove(c)
+	for i,v in ipairs(self.controls) do
+		if v == c then
+			table.remove(self.controls,i)
+		end
+	end
+end
+
 function GUIBase:updateChildren(dt)
 	for i,v in ipairs(self.controls) do
 		v:update(dt)
@@ -188,9 +196,17 @@ function GUIBase:contains(x,y,absolute)
 	return self.x <= x and x < self.x + self.width and self.y <= y and y < self.y + self.height
 end
 
+function GUIBase:getPosition()
+	return self.x, self.y
+end
+
 function GUIBase:setPosition(x,y)
 	self.x = x
 	self.y = y
+end
+
+function GUIBase:getSize()
+	return self.width, self.height
 end
 
 function GUIBase:setSize(w,h)

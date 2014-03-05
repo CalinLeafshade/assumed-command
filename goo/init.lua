@@ -19,13 +19,11 @@ Goo.draw = function()
 end
 
 Goo.mouseDown = function(x,y,b)
-	if not Goo.base:onMouseDown(x,y,b) then -- Goo didnt catch the click
-		
-	end
+	return Goo.base:onMouseDown(x,y,b)
 end
 
 Goo.mouseUp = function(x,y,b)
-	Goo.base:onMouseUp(x,y,b)
+	return Goo.base:onMouseUp(x,y,b)
 end
 
 Goo.keyDown = function(key)

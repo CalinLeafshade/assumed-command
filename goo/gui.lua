@@ -14,10 +14,17 @@ function GUI:initialize()
 	self.closeButton = GUIButton(self)
 	
 	self.closeButton.text = "X"
+	self.closeButton:subscribe("Click", function(self)
+		self.parent:close()
+	end)
 	self:initializeLayout()
 end
 
 function GUI:initializeLayout() end
+
+function GUI:close()
+	self.parent:remove(self)
+end
 
 function GUI:focus()
 	self:bringToFront()
@@ -42,6 +49,13 @@ function GUI:onMouseUp()
 	self.dragging = nil
 end
 
+function GUI:lockToScreen()
+	local x,y,w,h = self:getBounds()
+	local ww,hh = love.graphics.getWidth(), love.graphics.getHeight()
+	self:setPosition(clamp(x,0,ww-w),clamp(y,0,hh-h))
+end
+	
+
 function GUI:update(dt)
 	
 	self.closeButton:setBounds(self.width - self.titleBarHeight,7,self.titleBarHeight - 10,self.titleBarHeight - 15)
@@ -50,6 +64,7 @@ function GUI:update(dt)
 		local lx,ly = self.parent:absolutePosition()
 		self:setPosition(mx - lx - self.dragging[1], my - ly - self.dragging[2])
 	end
+	self:lockToScreen()
 	self:updateChildren(dt)
 end
 

@@ -40,9 +40,7 @@ end
 
 function GUITextBox:onMouseDown(x,y)
 	self:base().onMouseDown(self,x,y)
-	print(x)
 	self.caret = self:positionToCaret(x-5)
-	print(self.caret)
 end
 
 function GUITextBox:onTextEntry(text)
