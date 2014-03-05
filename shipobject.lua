@@ -17,3 +17,7 @@ function ShipObject:onClick(b)
 	
 end
 
+function ShipObject:getPosition()
+	return self.position:unpack()
+end
+

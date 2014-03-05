@@ -42,6 +42,9 @@ function love.mousereleased(x,y,b)
 end
 
 function love.keypressed(key)
+	if key == "q" then
+		love.event.push("quit")
+	end
 	Goo.keyDown(key)
 end
 

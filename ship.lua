@@ -1,6 +1,4 @@
 
-require("TLPath")
-
 Ship = Class("Ship")
 
 function Ship:initialize(name)
@@ -48,8 +46,6 @@ function Ship:genPathNodes()
 		end
 	end
 	self.pathNodes = nodes
-	TLpath.calcNodes(nodes)
-	TLpath.setGfunction([[local d = ((b.x-a.x)^2+(b.y-a.y)^2)^0.5 return d<=1 and d or nil]])
 end
 
 function Ship:getNearestPathNode(x,y)
@@ -110,7 +106,6 @@ function Ship:update(dt)
 	for i,v in pairs(self.objects) do
 		v:update(dt)
 	end
-	TLpath.update(dt)
 end
 
 function Ship:draw()

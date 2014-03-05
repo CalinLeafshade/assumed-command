@@ -30,7 +30,7 @@ local function setEventHandler(gui,name)
 	end
 end
 
-local events = {"MouseEnter", "MouseHover", "MouseLeave", "MouseDown", "MouseUp", "TextEntry", "KeyDown", "KeyUp"}
+local events = {"Resize","MouseEnter", "MouseHover", "MouseLeave", "MouseDown", "MouseUp", "TextEntry", "KeyDown", "KeyUp"}
 
 for i,v in ipairs(events) do
 	setEventHandler(GUIControl,v)

@@ -205,6 +205,8 @@ function GUIBase:setPosition(x,y)
 	self.y = y
 end
 
+
+
 function GUIBase:getSize()
 	return self.width, self.height
 end
@@ -212,6 +214,7 @@ end
 function GUIBase:setSize(w,h)
 	self.width = w
 	self.height = h
+	self:onResize()
 end
 
 function GUIBase:setBounds(x,y,w,h)
@@ -223,6 +226,8 @@ function GUIBase:getBounds()
 	return self.x,self.y,self.width,self.height
 end
 
+
+function GUIBase:onResize() end
 function GUIBase:onMouseEnter() end
 function GUIBase:onMouseLeave() end
 function GUIBase:onMouseHover() end
