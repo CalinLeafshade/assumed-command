@@ -6,7 +6,8 @@ require('goo.button')
 
 Goo = {}
 
-
+guiPatch = NinePatch("gfx/gui/guimain.png",15)
+insetPatch = NinePatch("gfx/gui/guiinset.png",8)
 
 Goo.base = GUIBase()
 

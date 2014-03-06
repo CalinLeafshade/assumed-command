@@ -28,7 +28,6 @@ function Path:initialize(ship,fromX,fromY,toX,toY)
 	
 	local path = astar.path ( start, goal, self.ship.pathNodes, false, valid_node_func )
 	self.finder.path = path
-	print("Path", path[1].x)
 end
 
 function Path:waiting()
@@ -37,7 +36,7 @@ function Path:waiting()
 end
 
 local function isWalkableBetween(ship,p1,p2,step)
-	step = step or 0.5
+	step = step or 0.2
 	local p1 = Vector(p1.x - 0.5, p1.y - 0.5)
 	local p2 = Vector(p2.x - 0.5, p2.y - 0.5)
 	local stepVec = (p2-p1):normalized() * step
@@ -51,7 +50,6 @@ local function isWalkableBetween(ship,p1,p2,step)
 	local function test(p,tests)
 		local x,y = math.floor(p.x) + 1, math.floor(p.y) + 1
 		table.insert(tests, {x,y})
-		print(x,y)
 		if not ship:isWalkable(x,y) then
 			return false
 		end
@@ -97,7 +95,6 @@ function Path:optimize()
 		self.optimPathCopy[i] = self.finder.path[i]
 	end
 	self.optimTests = squareTests
-	print("Test Count " .. #squareTests)
 end
 
 function Path:unreachable()

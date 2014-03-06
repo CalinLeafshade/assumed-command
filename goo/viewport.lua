@@ -11,7 +11,8 @@ end
 
 function GUIViewport:onResize()
 	GUIControl.onResize(self)
-	self.viewport:setBounds(self:getSize())
+	local w,h = self:getSize()
+	self.viewport:setBounds(w-4,h-4)
 end
 
 function GUIViewport:update(dt)
@@ -20,6 +21,7 @@ function GUIViewport:update(dt)
 end
 
 function GUIViewport:draw()
-	self.viewport:draw(self.x,self.y)
+	insetPatch:draw(self:getBounds())
+	self.viewport:draw(self.x + 2,self.y + 2)
 end
 	

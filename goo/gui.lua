@@ -5,8 +5,7 @@ require('goo.button')
 GUI = Class("GUI", GUIControl)
 
 
-guiPatch = NinePatch("gfx/gui/guimain.png",15)
-insetPatch = NinePatch("gfx/gui/guiinset.png",8)
+
 
 function GUI:initialize()
 	GUIControl.initialize(self)

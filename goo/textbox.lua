@@ -2,7 +2,7 @@
 require('goo.guicontrol')
 
 GUITextBox = Class("GUITextBox", GUIControl)
-insetPatch = NinePatch("gfx/gui/guiinset.png",8)
+
 
 function GUITextBox:focus()
 	self.caret = self.text:len()

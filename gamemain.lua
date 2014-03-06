@@ -21,7 +21,7 @@ end
 function GameMain:update(dt)
 	if self.dragging then 
 		mx,my = love.mouse.getPosition()
-		mainViewport:lookAt(self.dragging[3] + (self.dragging[1] - mx) / self.camera.scale, self.dragging[4] + (self.dragging[2] - my) / self.camera.scale,true)
+		mainViewport:lookAt(self.dragging[3] + (self.dragging[1] - mx) / mainViewport.camera.scale, self.dragging[4] + (self.dragging[2] - my) / mainViewport.camera.scale,true)
 	end
 	mainViewport:setBounds(love.graphics.getWidth(), love.graphics.getHeight())
 	mainViewport:update(dt)

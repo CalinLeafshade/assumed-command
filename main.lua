@@ -26,6 +26,8 @@ end
 
 function love.draw()
 	manager:draw()
+	love.graphics.setColor(255,255,255)
+	love.graphics.print(love.timer.getFPS(),5,5)
 	Goo.draw()
 end
 
